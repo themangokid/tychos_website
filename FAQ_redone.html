@@ -1,0 +1,263 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Tychos.space</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .questions-formatting {
+            padding-top: 5px;
+        }
+      .theme-orange {
+        background-color: #ff7f11 !important;
+        color: white !important;
+        font-weight: bold;
+        font-size: 1.25rem;
+        padding: 1rem 2rem;
+        box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
+        border-radius: 8px;
+        transition: background-color 0.3s, color 0.3s;
+      }
+
+      .theme-orange:hover {
+        background-color: #ff9a3b;
+        color: black;
+      }
+
+      .question-item {
+        background-color: #4b5563;
+        padding: 2rem;
+        margin: 1rem;
+        border-radius: 0.5rem;
+        box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
+        transition: background-color 0.3s;
+
+      }
+
+      .question-item:hover {
+        background-color: #374151;
+      }
+    </style>
+    <script>
+      // Function to toggle visibility of groups
+      function toggleGroup(id) {
+        const group = document.getElementById(id);
+        group.classList.toggle('');
+      }
+    </script>
+  </head>
+  <body class="bg-gray-900 text-white">
+    <div class="container mx-auto py-16 px-4 md:px-8 lg:px-16 space-y-16">
+      <!-- Header Section -->
+      <div class="text-center mb-8">
+        <h2 class="text-4xl font-extrabold text-orange-400">🔭 Unveil the Mysteries of the TYCHOS Model</h2>
+        <p class="text-lg text-gray-200 mt-4">
+          Explore the categorized questions that challenge and expand our understanding of the cosmos through the TYCHOS model.
+        </p>
+      </div>
+
+      <!-- Categories Section -->
+      <div class="space-y-12">
+        <!-- Binary Systems and Relationships -->
+        <div>
+          <button class="theme-orange" onclick="toggleGroup('binary-systems')">
+            Binary Systems and Relationships
+          </button>
+          <ul id="binary-systems" class="" mt-4 space-y-3">
+            <li class="question-item">
+              🌍 <strong class="text-lg">Could Mars be the Sun’s binary companion?</strong>
+              – What if Mars is the missing piece, explaining Earth's ‘clockwise’ equinoctial precession?
+            </li>
+            <li class="question-item">
+              ✨ <strong class="text-lg">Is Sirius a mirror of our Sun and Mars?</strong>
+              – Could the Sirius A-B system reflect our own Sun-Mars binary pair, forming a ‘double-double’ system?
+            </li>
+            <li class="question-item">
+              🌀 <strong class="text-lg">What is the 811,000-year ‘mega cycle’?</strong>
+              – Could this mega cycle be the time it takes for the Solar System and Sirius to orbit each other?
+            </li>
+          </ul>
+        </div>
+
+        <!-- Planetary Orbits and Motions -->
+        <div>
+          <button class="theme-orange" onclick="toggleGroup('planetary-orbits')">
+            Planetary Orbits and Motions
+          </button>
+          <ul id="planetary-orbits" class="" mt-4 space-y-3">
+            <li class="question-item">
+              🌕 <strong class="text-lg">Why don’t Mercury and Venus have moons?</strong>
+              – Could these planets be moons themselves, revolving around the Sun rather than hosting their own?
+            </li>
+            <li class="question-item">
+              🔭 <strong class="text-lg">Why are the orbits of Venus and Mercury co-planar with the Sun’s ecliptic?</strong>
+              – Could this be evidence that they are moons of the Sun?
+            </li>
+            <li class="question-item">
+              🔄 <strong class="text-lg">What is Mars’ ‘great cycle’?</strong>
+              – Does the locked 2:1 ratio with the Sun explain Mars’ 50,688-year cycle?
+            </li>
+            <li class="question-item">
+              ⭐️ <strong class="text-lg">Are planetary orbits really elliptical?</strong>
+              – Or have Kepler and Newton’s models misrepresented the true circular paths of celestial bodies?
+            </li>
+          </ul>
+        </div>
+
+        <!-- Retrograde Motions and Axial Tilts -->
+        <div>
+          <button class="theme-orange" onclick="toggleGroup('retrograde-motions')">
+            Retrograde Motions and Axial Tilts
+          </button>
+          <ul id="retrograde-motions" class="questions-formatting" mt-4 space-y-3">
+            <li class="question-item">
+              🔄 <strong class="text-lg">Why do Mars and the Sun share a 79-year cycle?</strong>
+              – Is this cosmic dance the key to their binary relationship?
+            </li>
+            <li class="question-item">
+              🔄 <strong class="text-lg">Why do planetary retrograde motions defy the laws of perspective?</strong>
+              – How does the TYCHOS model resolve this contradiction with simple geometry?
+            </li>
+            <li class="question-item">
+              🌀 <strong class="text-lg">Why does Venus appear to rotate clockwise?</strong>
+              – Is this an illusion caused by the heliocentric model’s misunderstanding?
+            </li>
+            <li class="question-item">
+              🌍 <strong class="text-lg">Why do the Sun, Mars, and the Moon share a 7° axial tilt?</strong>
+              – Is this tilt another clue to the binary link between our Solar System and the Sirius system?
+            </li>
+          </ul>
+        </div>
+
+        <!-- Earth’s Motion and Related Phenomena -->
+        <div>
+          <button class="theme-orange" onclick="toggleGroup('earth-motion')">
+            Earth’s Motion and Related Phenomena
+          </button>
+          <ul id="earth-motion" class="´" mt-4 space-y-3">
+            <li class="question-item">
+              🔄 <strong class="text-lg">What causes the Precession of the Equinoxes?</strong>
+              – Could it be Earth’s slow orbit around the PVP path, rather than the Earth’s ‘wobble’?
+            </li>
+            <li class="question-item">
+              🌍 <strong class="text-lg">Is Earth’s rotation really decelerating?</strong>
+              – Or have astronomers misinterpreted Earth’s slow orbital movement around the PVP orbit?
+            </li>
+            <li class="question-item">
+              🌀 <strong class="text-lg">What does the analemma reveal about Earth’s motion?</strong>
+              – Could this 8-shaped curve be evidence of Earth’s slow motion along the PVP orbit?
+            </li>
+            <li class="question-item">
+              🌍 <strong class="text-lg">Why can’t we feel the Earth rotating or orbiting?</strong>
+              – Could it be because Earth’s true orbital speed is only 1.6 km/h?
+            </li>
+          </ul>
+        </div>
+
+        <!-- Solar and Lunar Mysteries -->
+        <div>
+          <button class="theme-orange" onclick="toggleGroup('solar-lunar')">
+            Solar and Lunar Mysteries
+          </button>
+          <ul id="solar-lunar" class="questions-formatting" mt-4 space-y-3">
+            <li class="question-item">
+              🌕 <strong class="text-lg">Could the Moon be the ‘central driveshaft’ of the Solar System?</strong>
+              – How does the Moon’s synodic period harmonize with the orbits of all planets?
+            </li>
+            <li class="question-item">
+              🌓 <strong class="text-lg">How does the Moon align with the same star every 27.3 days?</strong>
+              – Does the TYCHOS model debunk the heliocentric claim of Earth’s rapid movement?
+            </li>
+            <li class="question-item">
+              🌕 <strong class="text-lg">Why does the Moon oscillate between perigees and apogees?</strong>
+              – Could this be the result of Earth’s annual motion along the PVP orbit?
+            </li>
+            <li class="question-item">
+              🌓 <strong class="text-lg">Does the Moon really accelerate in relation to the Earth?</strong>
+              – Or is this illusion simply caused by the Earth-Moon system’s slow motion?
+            </li>
+          </ul>
+        </div>
+
+        <!-- Cycles and Synchronization -->
+        <div>
+          <button class="theme-orange" onclick="toggleGroup('cycles')">
+            Cycles and Synchronization
+          </button>
+          <ul id="cycles" class="" mt-4 space-y-3">
+            <li class="question-item">
+              🌍 <strong class="text-lg">What is the significance of the 405,000-year cycle?</strong>
+              – How do all the ‘inner’ bodies of the Solar System return to their original positions in this stable cycle?
+            </li>
+            <li class="question-item">
+              🌀 <strong class="text-lg">Why does the equinoctial precession seem to increase exponentially?</strong>
+              – Could the TYCHOS model provide the geometric explanation for this mysterious acceleration?
+            </li>
+            <li class="question-item">
+              🔢 <strong class="text-lg">What is the mysterious significance of the number 137?</strong>
+              – Does the TYCHOS model uncover a cosmic connection in this famous constant?
+            </li>
+          </ul>
+        </div>
+
+        <!-- Cometary and Stellar Observations -->
+        <div>
+          <button class="theme-orange" onclick="toggleGroup('cometary-stellar')">
+            Cometary and Stellar Observations
+          </button>
+          <ul id="cometary-stellar" class="" mt-4 space-y-3">
+            <li class="question-item">
+              ☄️ <strong class="text-lg">Are cometary orbits really cigar-shaped?</strong>
+              – Or has Newton’s misidentification of comets led us down the wrong path?
+            </li>
+            <li class="question-item">
+              ☄️ <strong class="text-lg">Does Halley’s comet have a chaotic orbit?</strong>
+              – Or is its 75.7-year cycle perfectly regular, as the TYCHOS model suggests?
+            </li>
+            <li class="question-item">
+              🌌 <strong class="text-lg">Is ‘stellar aberration’ proof of Earth’s orbit around the Sun?</strong>
+              – Or does the TYCHOS model offer a simpler explanation for these observed looping motions?
+            </li>
+          </ul>
+        </div>
+
+        <!-- Misconceptions and Scientific Challenges -->
+        <div>
+          <button class="theme-orange" onclick="toggleGroup('misconceptions')">
+            Misconceptions and Scientific Challenges
+          </button>
+          <ul id="misconceptions" class="" mt-4 space-y-3">
+            <li class="question-item">
+              🔬 <strong class="text-lg">What did the Michelson-Morley experiments really show?</strong>
+              – Did these famous experiments actually support Earth’s slow orbital motion, not nullify it?
+            </li>
+            <li class="question-item">
+              🌌 <strong class="text-lg">Is ‘dark matter’ and ‘dark energy’ real?</strong>
+              – Or are these concepts spurious attempts to explain the inflated distances to stars?
+            </li>
+          </ul>
+        </div>
+
+        <!-- Unique Patterns and Structures -->
+        <div>
+          <button class="theme-orange" onclick="toggleGroup('unique-patterns')">
+            Unique Patterns and Structures
+          </button>
+          <ul id="unique-patterns" class="" mt-4 space-y-3">
+            <li class="question-item">
+              🌌 <strong class="text-lg">Why do Jupiter and Saturn’s conjunctions appear chaotic?</strong>
+              – Could Earth’s slow motion along the PVP orbit be the key to resolving this ancient puzzle?
+            </li>
+            <li class="question-item">
+              🌌 <strong class="text-lg">Why does Barnard’s star exhibit strange motions?</strong>
+              – Could its peculiar oscillation be due to the Earth’s trochoidal orbit?
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
