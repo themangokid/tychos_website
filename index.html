@@ -167,7 +167,7 @@ function makeIframeFullscreen() {
       justify-content: center;
       background-image: url("./images/asfalt-light.png" ), radial-gradient( circle, #7e5835 10%, #b08d67 90%);
       color: white;
-      padding: 2rem;
+      padding: 2.1rem;
       text-align: center;
       border-bottom: 4px solid #5e3c24;
     }
@@ -191,6 +191,7 @@ function makeIframeFullscreen() {
       padding: 1rem;
     }
     footer {
+      font-family: 'Palatino Linotype', serif;
       border-top: 3px solid #83593b;
       background-color: #5e3c24;
       color: #f9f7f2;
@@ -204,19 +205,32 @@ function makeIframeFullscreen() {
 <body>
   <!-- Header Section -->
   <header class="header flex flex-col items-center justify-center">
-    <img src="images/white_the_tychos.png" width="15%" height="15%">
-    <p class="tile__content mt-2 text-xl">Our Geoaxial Binary System.</p> 
+    <img src="images/white_the_tychos_lower.png" 
+         alt="TYCHOS Logo" 
+         class="w-3/4 sm:w-1/2 md:w-1/3 lg:w-1/3 xl:w-1/5 h-auto mb-4">
+    <p class="tile__content mt-2 text-xl text-center">Our Geoaxial Binary System.</p> 
+    
   </header>
   
   <!-- Main Content -->
   <main class="container mx-auto px-4 py-8 space-y-16">
     <!-- Call to Action -->
     <section class="text-center">
-      <a href="https://book.tychos.space/#a-general-introduction-to-the-tychos-model" target="_blank" class="btn-primary">Read Book</a>
-      <a href="https://www.paypal.com/donate?token=pXFP64CieY3-VEKFfSXa66fyFRa0Hsi97ejKdL9JZ9810VJP8QdgRskBQ4VX85Q6Tp0fv5k--SeqzP_Z" target="_blank" class="btn-primary ml-4">Donate</a>
-      <a href="https://github.com/pholmq/tsnext-vite" target="_blank"class="btn-primary ml-4">Github</a>
-      <a href="https://forum.tychos.space/t/welcome-to-the-tychos-forum/7" target="_blank" class="btn-primary ml-4">Forums</a>
-      </section>
+      <div class="flex flex-col space-y-4 md:flex-row md:justify-center md:space-y-0 md:space-x-4">
+        <a href="https://book.tychos.space/#a-general-introduction-to-the-tychos-model" target="_blank" class="btn-primary">
+          Read Book
+        </a>
+        <a href="https://www.paypal.com/donate" target="_blank" class="btn-primary">
+          Donate
+        </a>
+        <a href="https://github.com/pholmq/tsnext-vite" target="_blank" class="btn-primary">
+          GitHub
+        </a>
+        <a href="https://forum.tychos.space/t/welcome-to-the-tychos-forum/7" target="_blank" class="btn-primary">
+          Forums
+        </a>
+      </div>
+    </section>
 
     <!-- Features Section -->
     <section>
