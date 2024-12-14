@@ -1,17 +1,56 @@
-
-<!--TDL 
-  1. ICON
-  2. Fixa texten tillsammans med Simon S.
--->
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>The Tychos</title>
+  <title>Tychos Model</title>
   <script src="https://cdn.tailwindcss.com"></script>
-
+<!-- SNAL -->
   <script>
+    // Snail animation logic
+    document.addEventListener("DOMContentLoaded", () => {
+      const snail = document.querySelector('.snail');
+      const slime = document.querySelector('.slime-trail');
+      const snailSpeed = 44.4; // pixels/second
+      let position = 0;
+      let animationInterval;
+  
+      // Function to animate the snail
+      const moveSnail = () => {
+        position += snailSpeed / 10; // Update position every 100ms
+        if (position > window.innerWidth) {
+          clearInterval(animationInterval); // Stop animation once it reaches the end
+          setTimeout(() => {
+            position = 0; // Reset position after completing animation
+            snail.style.transform = `translateX(${position}px)`; // Reset snail
+            slime.style.width = '0'; // Reset slime trail
+          }, 500); // Delay to show end position briefly before reset
+          return;
+        }
+        snail.style.transform = `translateX(${position}px)`;
+        slime.style.width = `${position + 50}px`; // Update slime trail length
+      };
+  
+      // Start animation on click
+      snail.addEventListener('click', () => {
+        if (animationInterval) return; // Prevent multiple intervals
+        animationInterval = setInterval(moveSnail, 100);
+  
+        // Disable further clicks during animation
+        snail.style.pointerEvents = 'none';
+  
+        // Re-enable clicking after animation ends
+        setTimeout(() => {
+          snail.style.pointerEvents = 'auto';
+        }, (window.innerWidth / (snailSpeed / 10)) * 100); // Calculate total animation time
+      });
+    });
+  </script>
+  
+
+
+<!-- FULSCREEN -->
+<script>
 function makeIframeFullscreen() {
   const iframe = document.getElementById('tychos-simulator');
   const button = document.getElementById('dive-button');
@@ -42,7 +81,9 @@ function makeIframeFullscreen() {
   }, 600); // Match transition duration
 }
   </script>
-  <style>
+
+<!-- ANIM SCALE-->
+<style>
     #tychos-simulator {
       transition: transform 0.5s ease, width 0.5s ease, height 0.5s ease;
     }
@@ -52,6 +93,8 @@ function makeIframeFullscreen() {
       box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
     }
   </style>
+
+ <!-- ANIM PULSING--> 
 <style>
 /* Button Styling */
 .animated-button {
@@ -92,6 +135,8 @@ function makeIframeFullscreen() {
   animation: pulse 0.8s infinite;
 }
 </style>
+
+<!-- MAIN -->
   <style>
 
   .tile__content {
@@ -104,7 +149,7 @@ function makeIframeFullscreen() {
       font-family: 'Roboto', sans-serif;
       margin: 0;
       padding: 0;
-      background-image: url("https://www.transparenttextures.com/patterns/asfalt-light.png" ), radial-gradient( circle, #cec6b3, #d6d0c5 9  0%);
+      background-image: url("./images/asfalt-light.png" ), radial-gradient( circle, #cec6b3, #d6d0c5 9  0%);
       
     }
     .card {
@@ -119,8 +164,8 @@ function makeIframeFullscreen() {
       box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.15);
     }
     .header {
-   
-      background-image: url("https://www.transparenttextures.com/patterns/asfalt-light.png" ), radial-gradient( circle, #7e5835 10%, #b08d67 90%);
+      justify-content: center;
+      background-image: url("./images/asfalt-light.png" ), radial-gradient( circle, #7e5835 10%, #b08d67 90%);
       color: white;
       padding: 2rem;
       text-align: center;
@@ -146,22 +191,23 @@ function makeIframeFullscreen() {
       padding: 1rem;
     }
     footer {
+      border-top: 3px solid #83593b;
       background-color: #5e3c24;
       color: #f9f7f2;
       text-align: center;
       padding: 1rem;
       font-size: 0.875rem;
-      background-image: url("https://www.transparenttextures.com/patterns/asfalt-light.png" ), radial-gradient( circle, #7e5835 10%, #b08d67 90%);
+      background-image: url("./images/asfalt-light.png" ), radial-gradient( circle, #7e5835 10%, #b08d67 90%);
     }
   </style>
 </head>
 <body>
   <!-- Header Section -->
-  <header class="header">
-    <h1 class="tile__content text-5xl font-bold italic">The TYCHOS Model</h1>
-    <p class="tile__content mt-2 text-lg">Our Geoaxial Binary System</p>
+  <header class="header flex flex-col items-center justify-center">
+    <img src="images/white_the_tychos.png" width="15%" height="15%">
+    <p class="tile__content mt-2 text-xl">Our Geoaxial Binary System.</p> 
   </header>
-
+  
   <!-- Main Content -->
   <main class="container mx-auto px-4 py-8 space-y-16">
     <!-- Call to Action -->
@@ -192,16 +238,17 @@ function makeIframeFullscreen() {
     </section>
     <!-- Interactive 3D Simulator -->
     <section class="text-center">
-      <h2 class="text-3xl font-bold mb-4">Explore the Model </h2>
+      <h2 class="text-3xl font-bold mb-4 mt-5">Explore the Model </h2> 
       <p class="text-gray-700 mb-4">Experience our interactive 3D simulation that brings the TYCHOS model to life.</p>
       <button id="dive-button" 
               onclick="makeIframeFullscreen()"
               class="animated-button">
         Dive Into TYCHOSIUM
       </button>
-      <iframe id="tychos-simulator" 
+      <div class="px-10"></div>
+      <iframe  id="tychos-simulator" 
               src="https://tsnext-vite.vercel.app/?date=2000-06-21&time=12:00:00" 
-              class="w-full h-80 rounded-lg border-none shadow-lg mt-6"></iframe>
+              class="w-full h-80 rounded-lg border-none shadow-lg mt-10"></iframe>
     </section>
     <!-- FAQ Section -->
     <section>
@@ -229,10 +276,14 @@ function makeIframeFullscreen() {
         </div>
       </div>
     </section>
+      <div class="mt-7 snail">
+        <img class="" src="images/snail_of_PVP.png" width="5%" height="5%">
+  </a>
+    
   </main>
   <!-- Footer -->
-  <footer>
-    &copy; 2024 Simon Shack. All rights reserved.
+  <footer class="space-y-5 ">
+    &copy; 2024 Simon Shack. All rights reserved. 
   </footer>
 
 </body>
