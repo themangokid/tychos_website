@@ -1,0 +1,114 @@
+
+    #tychos-simulator {
+      transition: transform 0.5s ease, width 0.5s ease, height 0.5s ease;
+    }
+  
+    #tychos-simulator.scale-up {
+      transform: scale(1.2); /* Slight zoom effect */
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+    }
+  
+
+/* Button Styling */
+.animated-button {
+  background: linear-gradient(90deg, #7e5835, #b08d67);
+  color: white;
+  font-size: 1.5rem;
+  font-weight: bold;
+  padding: 0.75rem 2rem;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.animated-button:hover {
+  background: linear-gradient(90deg, #b08d67, #7e5835);
+  transform: translateY(-4px);
+  box-shadow: 0px 6px 16px rgba(0, 0, 0, 0.3);
+}
+
+.animated-button:focus {
+  outline: 2px solid #8c6239;
+  outline-offset: 4px;
+}
+
+/* Button Hover Animation */
+@keyframes pulse {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+}
+
+.animated-button:hover {
+  animation: pulse 0.8s infinite;
+}
+
+
+
+  .tile__content {
+      font-family: 'Palatino Linotype', serif;
+    }
+    body {
+      background: radial-gradient(circle, #ebe7dd, #d6d0c5);
+      color: #3a3a3a;
+      font-family: 'Palatino Linotype', serif;
+      font-family: 'Roboto', sans-serif;
+      margin: 0;
+      padding: 0;
+      background-image: url("./images/asfalt-light.png" ), radial-gradient( circle, #cec6b3, #d6d0c5 9  0%);
+      
+    }
+    .card {
+      background: #fefcf6;
+      box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+      border-radius: 12px;
+      padding: 1.5rem;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.15);
+    }
+    .header {
+      justify-content: center;
+      background-image: url("./images/asfalt-light.png" ), radial-gradient( circle, #492b10 20%, #c4a687 95%);
+      color: white;
+      padding: 2rem;
+      text-align: center;
+      border-bottom: 4px solid #5e3c24;
+    }
+    .btn-primary {
+      background-color: #8c6239;
+      color: white;
+      font-weight: bold;
+      padding: 0.75rem 1.5rem;
+      border-radius: 8px;
+      text-align: center;
+      display: inline-block;
+      transition: all 0.3s;
+    }
+    .btn-primary:hover {
+      background-color: #a47f53;
+    }
+    .faq {
+      background: #fcf8f2;
+      border: 1px solid #e2dccd;
+      border-radius: 10px;
+      padding: 1rem;
+    }
+    footer {
+      font-family: 'Palatino Linotype', serif;
+      border-top: 3px solid #83593b;
+      background-color: #5e3c24;
+      color: #f9f7f2;
+      text-align: center;
+      padding: 1.3rem;
+      font-size: 0.875rem;
+      background-image: url("./images/asfalt-light.png" ), radial-gradient( circle, #7e5835 10%, #b08d67 90%);
+    }
+  
