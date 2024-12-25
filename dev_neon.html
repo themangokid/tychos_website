@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <base href=".">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TYCHOS: Journey Through the Cosmos</title>
+
+  <!-- Google Fonts -->
+  <link
+    href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&family=Space+Grotesk:wght@400;700&family=Exo:wght@400;700&display=swap"
+    rel="stylesheet"
+  />
+
+  <!-- Cosmic-Themed Styles -->
+  <style>
+    :root {
+      --neon-blue: #00f3ff;
+      --neon-purple: #9d4edd;
+      --deep-space: #0a0a2a;
+      --star-white: #ffffff;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: var(--deep-space);
+      color: var(--star-white);
+      font-family: 'Space Grotesk', sans-serif;
+      overflow-x: hidden;
+    }
+
+    /* Starfield used as a background layer */
+    .starfield {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+    }
+
+    .star {
+      position: absolute;
+      width: 2px;
+      height: 2px;
+      background: var(--star-white);
+      border-radius: 50%;
+    }
+
+    @keyframes twinkle {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.3; }
+    }
+
+    /* Parallax Header */
+    .parallax-header {
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      perspective: 1000px;
+      overflow: hidden;
+      position: relative;
+      text-align: center;
+    }
+
+    .cosmic-title {
+      font-size: 4rem;
+      font-family: 'Orbitron', sans-serif;
+      background: linear-gradient(45deg, var(--neon-blue), var(--neon-purple));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: float 6s ease-in-out infinite;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-20px); }
+    }
+
+    /* Main Content Container */
+    main {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 2rem;
+      display: flex;
+      flex-direction: column;
+      gap: 3rem;
+    }
+
+    /* Book Container */
+    .book-container {
+      position: relative;
+      width: 300px;
+      height: 450px;
+      margin: 2rem auto;
+      transform-style: preserve-3d;
+      transition: transform 0.5s ease;
+    }
+
+    .book-container:hover {
+      transform: rotateY(15deg) scale(1.05);
+    }
+
+    .book-cover {
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(135deg, #2a2a7a, #4a0072);
+      border-radius: 10px;
+      box-shadow: 0 0 20px rgba(157, 78, 221, 0.5);
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Cosmic Comet (replaces the snail) */
+    .cosmic-comet {
+      position: absolute;
+      width: 50px;
+      height: 50px;
+      cursor: pointer;
+      filter: url(#glow);
+      animation: orbit 20s linear infinite;
+    }
+
+    @keyframes orbit {
+      from { transform: rotate(0deg) translateX(150px) rotate(0deg); }
+      to { transform: rotate(360deg) translateX(150px) rotate(-360deg); }
+    }
+
+    /* Cosmic Buttons */
+    .button-container {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      margin-bottom: 2rem;
+    }
+
+    .cosmic-button {
+      padding: 1rem 2rem;
+      border: none;
+      border-radius: 30px;
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(10px);
+      color: var(--star-white);
+      font-family: 'Exo', sans-serif;
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
+      transition: all 0.3s ease;
+    }
+
+    .cosmic-button:hover {
+      transform: translateY(-3px);
+    }
+
+    .cosmic-button::before {
+      content: '';
+      position: absolute;
+      top: -2px;
+      left: -2px;
+      right: -2px;
+      bottom: -2px;
+      border-radius: 30px;
+      background: linear-gradient(45deg, var(--neon-blue), var(--neon-purple));
+      z-index: -1;
+      animation: borderGlow 2s linear infinite;
+    }
+
+    @keyframes borderGlow {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.5; }
+    }
+
+    /* Features / Info Cards (Why the TYCHOS Model) */
+    .features-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 2rem;
+    }
+
+    .feature-card {
+      background: rgba(255, 255, 255, 0.07);
+      border-radius: 10px;
+      padding: 1.5rem;
+      box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
+      transition: transform 0.3s ease;
+    }
+
+    .feature-card:hover {
+      transform: translateY(-5px);
+    }
+
+    .feature-card h3 {
+      font-family: 'Orbitron', sans-serif;
+      margin-bottom: 0.5rem;
+    }
+
+    .feature-card p {
+      line-height: 1.5;
+    }
+
+    /* TYCHOS Simulator */
+    .simulator-section {
+      text-align: center;
+    }
+
+    .simulator-frame {
+      width: 100%;
+      height: 450px;
+      border: none;
+      border-radius: 10px;
+      box-shadow: 0 0 15px rgba(255, 255, 255, 0.2);
+      margin-top: 1rem;
+      transition: transform 0.4s ease, box-shadow 0.4s ease;
+    }
+
+    .simulator-frame:hover {
+      transform: scale(1.02);
+      box-shadow: 0 0 25px rgba(255, 255, 255, 0.3);
+    }
+
+    /* FAQ */
+    .faq-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+    }
+
+    .faq-item {
+      background: rgba(255, 255, 255, 0.07);
+      border-radius: 10px;
+      padding: 1rem;
+      box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
+      transition: transform 0.3s ease;
+    }
+
+    .faq-item:hover {
+      transform: translateY(-3px);
+    }
+
+    .faq-item h4 {
+      font-family: 'Orbitron', sans-serif;
+      margin-bottom: 0.5rem;
+    }
+
+    /* Footer */
+    footer {
+      background: #1a1a3a;
+      text-align: center;
+      padding: 1.5rem;
+      position: relative;
+    }
+
+    footer p {
+      font-size: 0.9rem;
+      color: var(--star-white);
+    }
+
+    .hidden-planet {
+      width: 40px;
+      height: 40px;
+      background: var(--neon-blue);
+      border-radius: 50%;
+      position: absolute;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      animation: hiddenOrbit 10s linear infinite;
+      cursor: pointer;
+    }
+
+    @keyframes hiddenOrbit {
+      0% { transform: translateX(-50%) translateY(0) rotate(0deg); }
+      100% { transform: translateX(-50%) translateY(-10px) rotate(360deg); }
+    }
+
+    .supernova {
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      background: radial-gradient(circle, var(--neon-purple) 0%, transparent 60%);
+      border-radius: 50%;
+      pointer-events: none;
+      animation: explode 1s forwards;
+    }
+
+    @keyframes explode {
+      0% {
+        transform: scale(0.5);
+        opacity: 1;
+      }
+      100% {
+        transform: scale(3);
+        opacity: 0;
+      }
+    }
+  </style>
+
+  <!-- Script Section for Starfield, Comet, Supernova, Easter Egg, etc. -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      // Create starfield
+      createStarfield();
+
+      // Handle comet (snail replacement) click events
+      const comet = document.querySelector('.cosmic-comet');
+      comet.addEventListener('click', createSupernova);
+
+      // Easter Egg: Hidden planet
+      const hiddenPlanet = document.querySelector('.hidden-planet');
+      hiddenPlanet.addEventListener('click', revealCosmicMessage);
+    });
+
+    function createStarfield() {
+      const starfield = document.querySelector('.starfield');
+      for (let i = 0; i < 200; i++) {
+        const star = document.createElement('div');
+        star.className = 'star';
+        star.style.left = `${Math.random() * 100}%`;
+        star.style.top = `${Math.random() * 100}%`;
+        star.style.animation = `twinkle ${2 + Math.random() * 3}s infinite`;
+        starfield.appendChild(star);
+      }
+    }
+
+    function createSupernova(event) {
+      const supernova = document.createElement('div');
+      supernova.className = 'supernova';
+      supernova.style.left = `${event.clientX}px`;
+      supernova.style.top = `${event.clientY}px`;
+      document.body.appendChild(supernova);
+
+      setTimeout(() => {
+        supernova.remove();
+      }, 1000);
+    }
+
+    function revealCosmicMessage() {
+      alert('You have discovered a hidden cosmic riddle:\n\n"In quiet orbits Earth does spin,\nYet secrets hide in cosmic kin;\nTo chart the heavens far and wide,\nOur TYCHOS path we will abide."');
+    }
+  </script>
+</head>
+
+<body>
+  <!-- Starfield Layer -->
+  <div class="starfield"></div>
+
+  <!-- Parallax Header -->
+  <header class="parallax-header">
+    <h1 class="cosmic-title">TYCHOS: Journey Through the Cosmos</h1>
+  </header>
+
+  <!-- Main Content -->
+  <main>
+    <!-- Call-to-Action Buttons (mirroring original site’s “Book,” “Donate,” etc.) -->
+    <div class="button-container">
+      <a
+        href="https://book.tychos.space/#a-general-introduction-to-the-tychos-model"
+        target="_blank"
+        class="cosmic-button"
+      >
+        Read the TYCHOS Book
+      </a>
+      <a
+        href="https://www.paypal.com/donate"
+        target="_blank"
+        class="cosmic-button"
+      >
+        Donate
+      </a>
+      <a
+        href="https://github.com/pholmq/tsnext-vite"
+        target="_blank"
+        class="cosmic-button"
+      >
+        GitHub
+      </a>
+      <a
+        href="https://forum.tychos.space/t/welcome-to-the-tychos-forum/7"
+        target="_blank"
+        class="cosmic-button"
+      >
+        Forums
+      </a>
+    </div>
+
+    <!-- Interactive Book Cover (With Comet) -->
+    <div class="book-container">
+      <div class="book-cover">
+        <svg class="cosmic-comet" viewBox="0 0 100 100">
+          <defs>
+            <filter id="glow">
+              <feGaussianBlur stdDeviation="2" result="coloredBlur"/>
+              <feMerge>
+                <feMergeNode in="coloredBlur"/>
+                <feMergeNode in="SourceGraphic"/>
+              </feMerge>
+            </filter>
+          </defs>
+          <path d="M10,50 Q50,10 90,50" 
+                stroke="var(--neon-blue)" 
+                stroke-width="2" 
+                fill="none"/>
+          <circle cx="90" cy="50" r="5" fill="var(--neon-purple)"/>
+        </svg>
+      </div>
+    </div>
+
+    <!-- Features Section (Why the TYCHOS Model?) -->
+    <section>
+      <h2 style="text-align:center; font-family: 'Orbitron', sans-serif; font-size: 2rem; margin-bottom:1rem;">
+        Why the TYCHOS Model?
+      </h2>
+      <div class="features-container">
+        <div class="feature-card">
+          <h3>🌌 A New Cosmic Paradigm</h3>
+          <p>
+            Break free from traditional models and explore a dynamic, interconnected TYCHOSIUM that
+            redefines our understanding of planetary motion.
+          </p>
+        </div>
+        <div class="feature-card">
+          <h3>🔭 Scientific Insights</h3>
+          <p>
+            Discover how the TYCHOS model explains astronomical phenomena—like Mars aligning with the
+            same star every 546 days—in a precise, geometric manner.
+          </p>
+        </div>
+        <div class="feature-card">
+          <h3>📖 Accessible Knowledge</h3>
+          <p>
+            From enthusiasts to experts, the TYCHOS approach simplifies complex celestial mechanics,
+            revealing why Venus and Mercury have no moons and more.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Interactive 3D Simulator -->
+    <section class="simulator-section">
+      <h2 style="font-family: 'Orbitron', sans-serif; font-size: 2rem; margin-bottom:1rem;">
+        Explore the Model
+      </h2>
+      <p>Experience our interactive 3D simulation that brings the TYCHOS model to life.</p>
+      <iframe
+        id="tychos-simulator"
+        src="https://tsnext-vite.vercel.app/?date=2000-06-21&time=12:00:00"
+        class="simulator-frame"
+      ></iframe>
+    </section>
+
+    <!-- FAQ Section -->
+    <section>
+      <h2 style="text-align:center; font-family: 'Orbitron', sans-serif; font-size: 2rem; margin:2rem 0 1rem 0;">
+        Frequently Asked Questions
+      </h2>
+      <div class="faq-container">
+        <div class="faq-item">
+          <h4>Why does Mars align with the same star every 546 days?</h4>
+          <p>The TYCHOS model reveals the precise geometry behind this intriguing phenomenon.</p>
+        </div>
+        <div class="faq-item">
+          <h4>Why do Venus and Mercury lack moons?</h4>
+          <p>Discover how their unique orbits may indicate their cosmic origins and properties.</p>
+        </div>
+        <div class="faq-item">
+          <h4>Is Earth really slowing down?</h4>
+          <p>
+            Learn how the TYCHOS model offers alternative explanations for Earth’s rotational changes
+            and the concept of precession.
+          </p>
+        </div>
+        <div class="faq-item">
+          <h4>What causes the Precession of the Equinoxes?</h4>
+          <p>
+            Uncover how Earth’s slow orbit along the PVP (Polar Variation Path) might hold the answer.
+          </p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <p>&copy; 2024 Simon Shack. All rights reserved.</p>
+    <div class="hidden-planet"></div>
+  </footer>
+</body>
+</html>

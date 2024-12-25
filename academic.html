@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <base href=".">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TYCHOS Observatory - Academic Portal</title>
+  
+  <!-- Optional: Tailwind (if you wish to keep the Tailwind-based classes) -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Google Fonts for Academic Look -->
+  <link
+    href="https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,400;0,700;1,400&family=Playfair+Display:wght@700&family=Roboto&display=swap"
+    rel="stylesheet"
+  />
+
+  <!-- Original Fullscreen Logic for the TYCHOS Simulator -->
+  <script>
+    function makeIframeFullscreen() {
+      const iframe = document.getElementById('tychos-simulator');
+      const button = document.getElementById('dive-button');
+      
+      // Smooth transition effect
+      iframe.style.transition = 'transform 0.4s ease, width 0.4s ease, height 0.4s ease';
+      iframe.style.transform = 'scale(1.3)';
+      iframe.style.boxShadow = '0 0 20px rgba(0, 0, 0, 0.5)';
+
+      button.disabled = true;
+      setTimeout(() => {
+        if (iframe.requestFullscreen) {
+          iframe.requestFullscreen();
+        } else if (iframe.webkitRequestFullscreen) {
+          iframe.webkitRequestFullscreen();
+        } else if (iframe.msRequestFullscreen) {
+          iframe.msRequestFullscreen();
+        }
+
+        // Cleanup: Restore after fullscreen
+        iframe.style.transition = '';
+        iframe.style.transform = '';
+        iframe.style.boxShadow = '';
+        button.disabled = false;
+      }, 600);
+    }
+  </script>
+
+  <!-- Academic-Themed Styles -->
+  <style>
+    /* Colors & Base */
+    :root {
+      --parchment: #f5e6d3;
+      --navy: #1a2238;
+      --brass: #b8860b;
+      --ink: #2c1810;
+      --aged-paper: #e8dcc4;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: var(--parchment);
+      color: var(--ink);
+      font-family: 'Roboto', 'Crimson Text', serif;
+      overflow-x: hidden;
+    }
+
+    /* Background pattern or academic texture */
+    body {
+      background-image: 
+        linear-gradient(rgba(245, 230, 211, 0.95), rgba(245, 230, 211, 0.95)),
+        url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M2 2h2v2H2zM20 2h2v2h-2zM38 2h2v2h-2zM56 2h2v2h-2zM74 2h2v2h-2zM92 2h2v2h-2z' fill='%23b8860b' fill-opacity='0.1'/%3E%3C/svg%3E");
+    }
+
+    /* Header (replacing old .header) */
+    .academic-header {
+      background: linear-gradient(to bottom, var(--navy), transparent);
+      text-align: center;
+      padding: 2rem;
+      min-height: 40vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      position: relative;
+    }
+
+    .academic-header img {
+      max-width: 300px;
+      margin: 0 auto 1rem;
+    }
+
+    .main-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 3.5rem;
+      color: var(--parchment);
+      margin-bottom: 1rem;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+    }
+
+    .subtitle {
+      color: var(--parchment);
+      font-size: 1.3rem;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    /* Telescope replaces snail animation */
+    .telescope-container {
+      width: 120px;
+      height: 120px;
+      margin: 2rem auto 0 auto;
+      position: relative;
+      cursor: pointer;
+    }
+
+    .telescope {
+      width: 100%;
+      height: 100%;
+      transition: transform 0.3s ease;
+    }
+
+    .trajectory {
+      position: absolute;
+      top: 0;
+      left: 0;
+      stroke-dasharray: 1000;
+      stroke-dashoffset: 1000;
+      animation: drawLine 3s ease forwards;
+    }
+
+    @keyframes drawLine {
+      to {
+        stroke-dashoffset: 0;
+      }
+    }
+
+    /* Container for main content (like .container mx-auto) */
+    .content-wrapper {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 2rem;
+    }
+
+    /* Minimal card styling for reusability (like .card) */
+    .academic-card {
+      background: var(--aged-paper);
+      box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+      border: 1px solid var(--brass);
+      border-radius: 10px;
+      padding: 1.5rem;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      margin-bottom: 2rem;
+      position: relative;
+    }
+
+    .academic-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.15);
+    }
+
+    /* Scholarly button style (like .btn-primary but academic) */
+    .scholarly-button {
+      display: inline-block;
+      padding: 0.75rem 1.5rem;
+      background-color: var(--aged-paper);
+      color: var(--ink);
+      font-family: 'Crimson Text', serif;
+      font-size: 1rem;
+      border: 1px solid var(--brass);
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .scholarly-button:hover {
+      background-color: var(--parchment);
+      box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.3);
+    }
+
+    /* Large CTA button reminiscent of the old animated-button */
+    .animated-button {
+      font-family: 'Crimson Text', serif;
+      background-color: var(--aged-paper);
+      border: 1px solid var(--brass);
+      color: var(--ink);
+      transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
+      font-size: 1.2rem;
+      font-weight: bold;
+      padding: 0.75rem 2rem;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+    .animated-button:hover {
+      transform: translateY(-3px);
+      box-shadow: 0px 6px 16px rgba(0,0,0,0.2);
+      background-color: var(--parchment);
+    }
+
+    /* FAQ styling */
+    .faq {
+      background: var(--aged-paper);
+      border: 1px solid var(--brass);
+      border-radius: 10px;
+      padding: 1rem;
+      margin: 0.5rem 0;
+      box-shadow: 0px 4px 8px rgba(0,0,0,0.07);
+      transition: transform 0.3s ease;
+    }
+    .faq:hover {
+      transform: translateY(-3px);
+    }
+    .faq h3 {
+      font-family: 'Playfair Display', serif;
+      margin-bottom: 0.5rem;
+    }
+    .faq p {
+      margin-bottom: 0;
+    }
+
+    /* Simulator frame styling */
+    #tychos-simulator {
+      width: 100%;
+      height: 450px;
+      border: 1px solid var(--brass);
+      border-radius: 10px;
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+      margin-top: 1rem;
+      transition: transform 0.4s ease, box-shadow 0.4s ease;
+    }
+    #tychos-simulator:hover {
+      transform: scale(1.02);
+      box-shadow: 0 0 25px rgba(0, 0, 0, 0.3);
+    }
+
+    /* Footer styling */
+    footer {
+      background-color: var(--navy);
+      color: var(--parchment);
+      text-align: center;
+      padding: 1.5rem;
+      position: relative;
+      margin-top: 2rem;
+    }
+
+    footer p {
+      margin-bottom: 0.5rem;
+      font-family: 'Crimson Text', serif;
+    }
+
+    /* Constellation cameo Easter egg */
+    .constellation-cameo {
+      position: absolute;
+      bottom: 10px;
+      right: 10px;
+      width: 40px;
+      height: 40px;
+      cursor: pointer;
+      opacity: 0.6;
+      transition: opacity 0.3s ease;
+    }
+    .constellation-cameo:hover {
+      opacity: 1;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+  </style>
+
+  <!-- Telescope (Snail Replacement) Logic -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      // Replace snail logic with telescope "path" logic
+      const telescope = document.querySelector('.telescope');
+      let isAnimating = false;
+
+      telescope.addEventListener('click', function(e) {
+        if (isAnimating) return;
+        isAnimating = true;
+
+        // Draw a "trajectory" path
+        const svgNS = "http://www.w3.org/2000/svg";
+        const trajectory = document.createElementNS(svgNS, "path");
+        trajectory.setAttribute("class", "trajectory");
+
+        // We'll create a simple arc (quadratic curve) from click
+        const x = e.offsetX, y = e.offsetY;
+        trajectory.setAttribute("d", `M${x},${y} Q${x + 60},${y - 40} ${x + 120},${y}`);
+        trajectory.setAttribute("stroke", "#b8860b");
+        trajectory.setAttribute("stroke-width", "2");
+        trajectory.setAttribute("fill", "none");
+
+        telescope.parentElement.appendChild(trajectory);
+
+        // Remove after the animation
+        setTimeout(() => {
+          trajectory.remove();
+          isAnimating = false;
+        }, 3000);
+      });
+
+      // Constellation cameo Easter egg
+      const cameo = document.querySelector('.constellation-cameo');
+      cameo.addEventListener('click', function() {
+        const note = document.createElement('div');
+        note.style.position = 'fixed';
+        note.style.bottom = '70px';
+        note.style.right = '20px';
+        note.style.background = 'var(--aged-paper)';
+        note.style.padding = '1rem';
+        note.style.border = '1px solid var(--brass)';
+        note.style.borderRadius = '5px';
+        note.style.maxWidth = '300px';
+        note.style.boxShadow = '0 2px 10px rgba(0,0,0,0.1)';
+        note.style.animation = 'fadeIn 0.3s ease';
+        note.style.fontFamily = 'Crimson Text, serif';
+        note.innerHTML = `
+          <p>"In the grand tapestry of the heavens, truth reveals itself<br>
+          to those who observe with patience and wisdom."</p>
+          <small>- From the Observatory Archives</small>
+        `;
+        document.body.appendChild(note);
+        setTimeout(() => note.remove(), 6000);
+      });
+    });
+  </script>
+</head>
+<body>
+  <!-- Header Section -->
+  <header class="academic-header">
+    <!-- Replaces old Tychos Logo area -->
+    <img src="images/white_the_tychos_lower.png" alt="TYCHOS Logo">
+    <h1 class="main-title">TYCHOS Observatory</h1>
+    <p class="subtitle">Our Geoaxial Binary System — An Academic Perspective</p>
+
+
+  </header>
+  
+  <!-- Main Content Wrapper -->
+  <main class="content-wrapper space-y-16">
+    <!-- Call to Action (Mirroring original site: Book, Donate, etc.) -->
+    <section class="text-center">
+      <div class="flex flex-col space-y-4 md:flex-row md:justify-center md:space-y-0 md:space-x-4">
+        <a href="https://book.tychos.space/#a-general-introduction-to-the-tychos-model" target="_blank" class="scholarly-button">
+          Read Book 
+        </a>
+        <a href="https://www.paypal.com/donate" target="_blank" class="scholarly-button">
+          Donate
+        </a>
+        <a href="https://github.com/pholmq/tsnext-vite" target="_blank" class="scholarly-button">
+          GitHub
+        </a>
+        <a href="https://forum.tychos.space/t/welcome-to-the-tychos-forum/7" target="_blank" class="scholarly-button">
+          Forums
+        </a>
+      </div>
+    </section>
+
+    <!-- Book Image + Purchase CTA -->
+    <section class="flex flex-col items-center justify-center text-center">
+      <div class="relative transition-transform duration-300 hover:scale-105 mb-4">
+        <img src="images/book_cover.png" alt="The TYCHOS Book"
+             class="w-72 rounded-lg shadow-2xl">
+      </div>
+      <a href="https://your-purchase-link.com"
+         class="animated-button">
+        Buy Now for $19.99
+      </a>
+    </section>
+
+    <!-- Features Section (Why the TYCHOS Model?) -->
+    <section>
+      <h2 class="text-3xl font-bold mb-6 text-center" style="font-family:'Playfair Display', serif;">
+        Why the TYCHOS Model?
+      </h2>
+      <div class="grid md:grid-cols-3 gap-8">
+        <div class="academic-card">
+          <h3 class="text-2xl mb-2" style="font-family:'Playfair Display', serif;">🌌 A New Cosmic Paradigm</h3>
+          <p>Break free from traditional models and explore a dynamic, interconnected TYCHOSIUM.</p>
+        </div>
+        <div class="academic-card">
+          <h3 class="text-2xl mb-2" style="font-family:'Playfair Display', serif;">🔭 Scientific Insights</h3>
+          <p>Discover how the TYCHOS model explains astronomical phenomena with precision.</p>
+        </div>
+        <div class="academic-card">
+          <h3 class="text-2xl mb-2" style="font-family:'Playfair Display', serif;">📖 Accessible Knowledge</h3>
+          <p>Perfect for enthusiasts and experts alike—understand the cosmos like never before.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Interactive 3D Simulator -->
+    <section class="text-center">
+      <h2 class="text-3xl font-bold mb-4 mt-5" style="font-family:'Playfair Display', serif;">
+        Explore the Model
+      </h2>
+      <p class="mb-4">Experience our interactive 3D simulation that brings the TYCHOS model to life.</p>
+      <button id="dive-button"
+              onclick="makeIframeFullscreen()"
+              class="animated-button">
+        Dive Into TYCHOSIUM
+      </button>
+      <div class="px-10"></div>
+      <iframe id="tychos-simulator"
+              src="https://tsnext-vite.vercel.app/?date=2000-06-21&time=12:00:00"
+              class="mt-6"
+      ></iframe>
+    </section>
+
+    <!-- FAQ Section -->
+    <section>
+      <h2 class="text-3xl font-bold mb-6 text-center" style="font-family:'Playfair Display', serif;">
+        Frequently Asked Questions
+      </h2>
+      <div class="grid md:grid-cols-2 gap-8">
+        <div class="faq">
+          <h3 class="text-lg font-semibold">Why does Mars align with the same star every 546 days?</h3>
+          <p>The TYCHOS model reveals the geometry behind this astronomical phenomenon.</p>
+        </div>
+        <div class="faq">
+          <h3 class="text-lg font-semibold">Why do Venus and Mercury lack moons?</h3>
+          <p>Discover how their unique orbits provide clues to their origins.</p>
+        </div>
+        <div class="faq">
+          <h3 class="text-lg font-semibold">Why do Venus and Mercury lack moons?</h3>
+          <p>Discover how their unique orbits provide clues to their origins.</p>
+        </div>
+        <div class="faq">
+          <h3 class="text-lg font-semibold">Is Earth really slowing down?</h3>
+          <p>The TYCHOS model offers an alternative explanation for this observation.</p>
+        </div>
+        <div class="faq">
+          <h3 class="text-lg font-semibold">What causes the Precession of the Equinoxes?</h3>
+          <p>Learn about Earth's slow orbit along the PVP as a potential answer.</p>
+        </div>
+        <div class="faq">
+          <h3 class="text-lg font-semibold">What causes the Precession of the Equinoxes?</h3>
+          <p>Learn about Earth's slow orbit along the PVP as a potential answer.</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <p>&copy; 2024 Simon Shack. All rights reserved.</p>
+    <!-- Constellation cameo as Easter egg -->
+    <svg class="constellation-cameo" viewBox="0 0 100 100">
+      <path d="M20,20 L40,40 L60,20 L80,40"
+            stroke="#b8860b"
+            stroke-width="2"
+            fill="none"/>
+      <circle cx="20" cy="20" r="2" fill="#b8860b"/>
+      <circle cx="40" cy="40" r="2" fill="#b8860b"/>
+      <circle cx="60" cy="20" r="2" fill="#b8860b"/>
+      <circle cx="80" cy="40" r="2" fill="#b8860b"/>
+    </svg>
+  </footer>
+</body>
+</html>
